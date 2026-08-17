@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-white leading-tight">
-            Add Category
+            Edit Category
         </h2>
     </x-slot>
 
@@ -10,8 +10,9 @@
 
             <div class="bg-white p-6 rounded-lg shadow">
 
-                <form action="{{ route('categories.store') }}" method="POST">
+                <form action="{{ route('categories.update', $category->id) }}" method="POST">
                     @csrf
+                    @method('PUT')
 
                     <div class="mb-4">
                         <label class="block mb-2">
@@ -21,11 +22,12 @@
                         <input
                             type="text"
                             name="name"
+                            value="{{ $category->name }}"
                             class="w-full border rounded px-3 py-2"
                             required>
                     </div>
 
-                    <div class="mb-6">
+                    <div class="mb-4">
                         <label class="block mb-2">
                             Description
                         </label>
@@ -33,22 +35,20 @@
                         <textarea
                             name="description"
                             rows="3"
-                            class="w-full border rounded px-3 py-2"></textarea>
+                            class="w-full border rounded px-3 py-2">{{ $category->description }}</textarea>
                     </div>
 
-                    <div style="display:flex;gap:10px;">
-                        <button
-                            type="submit"
-                            style="background:green;color:white;padding:10px 20px;border-radius:8px;border:none;cursor:pointer;">
-                            Save Category
-                        </button>
+                    <a
+                        href="{{ route('categories.index') }}"
+                        style="background:#6b7280;color:white;padding:10px 20px;border-radius:8px;text-decoration:none;">
+                        Back
+                    </a>
 
-                        <a
-                            href="{{ route('categories.index') }}"
-                            style="background:#6b7280;color:white;padding:10px 20px;border-radius:8px;text-decoration:none;">
-                            Cancel
-                        </a>
-                    </div>
+                    <button
+                        type="submit"
+                        style="background:#2563eb;color:white;padding:10px 20px;border-radius:8px;border:none;">
+                        Update Category
+                    </button>
 
                 </form>
 
